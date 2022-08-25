@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/08/18 15:32:51 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/08/25 11:56:16 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ struct s_philo
 
 struct s_data
 {
+	t_args 			args;
 	t_philo			philo[NB];
 	pthread_mutex_t	mutex_fork[NB];
 	pthread_mutex_t	mutex_death;
-	int				is_dead;
 	pthread_mutex_t	mutex_write;
 	pthread_mutex_t	mutex_last_meal;
 	pthread_mutex_t	mutex_nbtte;
-	int				is_full;
-	t_args 			args;
+	int				is_dead;
+	int				all_ate;
 };
 
 int		ft_isdigit(int c);
@@ -76,6 +76,7 @@ int		mutex_destroyer(t_data *data);
 int		fork_locker(t_data *data, t_philo *philo);
 int		fork_unlocker(t_data *data, t_philo *philo);
 
+void	init_datastruct(t_data *data);
 int		init_philo_index(t_data *data);
 int		init_philo_threads(t_data *data);
 int		thread_joiner(t_data *data);
@@ -92,6 +93,7 @@ void	ft_display_message(t_data *data, int index, char *msg);
 
 
 int		check_nb_meals(t_data *data);
+int		pulse_check(t_data *data, t_philo *philo);
 int		check_death(t_data *data);
 int		is_end(t_data *data);
 

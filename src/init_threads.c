@@ -6,11 +6,17 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 10:18:23 by copeugne          #+#    #+#             */
-/*   Updated: 2022/08/18 15:15:54 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/08/25 09:27:23 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
+void	init_datastruct(t_data *data)
+{
+	data->is_dead = 0;
+	data->all_ate = 0;
+}
 
 int	init_philo_index(t_data *data)
 {
