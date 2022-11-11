@@ -84,8 +84,9 @@ do
 	final="${(P)concat}"
 	parts=("${(@s[ ])final}")
 	# for j ("$parts[@]") print -r -- $j
+	timeout 2s ./philo $parts[1] $parts[2] $parts[3] $parts[4] 
 	c=$(( $c + 1 ))
 	concat="$tmp$c"
 	i=$(( $i + 1 ))
-	echo "\n"
+	# echo "\n"
 done

@@ -86,7 +86,7 @@ do
 	# timeout 2s ./philo "${!concat}"
 	echo $concat
 	echo "${(P)concat}"
-	timeout 2s ./philo "${(P)concat}"
+	# timeout 2s ./philo "${(P)concat}"
 	c=$(( $c + 1 ))
 	concat="$tmp$c"
 	i=$(( $i + 1 ))
