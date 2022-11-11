@@ -1,0 +1,2 @@
+gcc -Wall -Wextra -Werror -pthread -fsanitize=address -g3 test.c
+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

@@ -6,43 +6,54 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/08/25 12:18:16 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:40:31 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
+/**
+ * It checks if all the philosophers have eaten
+ * the number of meals they were supposed to eat
+ * 
+ * @param data the structure containing all the data
+ */
 void	check_nbmeals_philo(t_data *data)
 {
-	int c;
+	int	c;
 	int	i;
 
 	c = 0;
 	i = 0;
+	if (data->args.nb_tteat == 0)
+		data->all_ate = 1;
 	while (i < data->args.nb_philo - 1)
 	{
 		if (data->philo[i].nb_meals >= data->args.nb_tteat)
 			c++;
 		i++;
 	}
-	// pthread_mutex_lock(&data->mutex_write);
-	// printf(YELLOW"Nb philo full : %d\n"NORMAL, c);
-	// printf(BLUE"data->args.nb_philo - 1: %d\n"NORMAL, data->args.nb_philo - 1);
-	// printf(BLUE"data->args.nb_tteat : %d\n"NORMAL, data->args.nb_tteat);
-	// pthread_mutex_unlock(&data->mutex_write);
 	if (c == data->args.nb_philo - 1 && data->args.nb_tteat > 0)
-		data->all_ate = 1;
+		data->all_ate = 1;	
 }
 
+/**
+ * It checks if the number of meals has been
+ * reached and if so, it returns 1
+ * 
+ * @param data the structure containing all the data
+ */
 int		check_nb_meals(t_data *data)
 {
 	pthread_mutex_lock(&data->mutex_nbtte);
 	check_nbmeals_philo(data);
 	if (data->all_ate == 1)
 	{
-		// printf(RED"all ate : %d\n"NORMAL, data->all_ate);
 		pthread_mutex_unlock(&data->mutex_nbtte);
 		// TODO : Function to end the execution correctly.
+		pthread_mutex_lock(&data->mutex_death);
+		data->is_dead = 1;
+		pthread_mutex_unlock(&data->mutex_death);
 		return (1);
 	}
 	pthread_mutex_unlock(&data->mutex_nbtte);
@@ -56,32 +67,53 @@ int		check_nb_meals(t_data *data)
 	return (0);
 }
 
-int	pulse_check(t_data *data, t_philo *philo)
+/**
+ * It checks if a philosopher is still alive
+ * or if he died of starvation
+ * 
+ * @param data the structure containing all the data
+ */
+int	pulse_check(t_data *data)
 {
 	int	i;
-
+	int const time2die = data->args.ttdie;
+	t_copy copy;
+	long int t;
+	
 	i = 0;
-	pthread_mutex_lock(&data->mutex_last_meal);
-	if (ft_time() - data->philo[philo->index].last_meal >= data->args.ttdie)
+	if (data->args.nb_philo == 1)
+		return (0);
+	while (!check_death(data))
 	{
-		printf(RED"ft_time() - data->philo[%d].last_meal : %ld\n"NORMAL, i, ft_time() - data->philo[i].last_meal);
+		pthread_mutex_lock(&data->mutex_last_meal);
+		copy = *((t_copy *)(data->philo + i));
 		pthread_mutex_unlock(&data->mutex_last_meal);
-		ft_display_message(data, i, "died");
-		data->is_dead = 1;
-		return (1);
+		if (ft_time() - copy.last_meal >= time2die && copy.last_meal != -1)
+		{
+			t = ft_now(copy.start_time);
+			// ft_usleep(data->args.ttdie);
+			pthread_mutex_lock(&data->mutex_death);
+			data->is_dead = 1;
+			pthread_mutex_unlock(&data->mutex_death);
+			pthread_mutex_lock(&data->mutex_write);
+			printf("%lu %d %s\n", t, copy.index, "died");
+			pthread_mutex_unlock(&data->mutex_write);
+			return (1);
+		}
+		usleep(1000);
+		i++;
+		if (i == data->args.nb_philo)
+			i = 0;
 	}
-	pthread_mutex_unlock(&data->mutex_last_meal);
 	return (0);
 }
 
-int		check_death(t_data *data)
+int	check_death(t_data *data)
 {
+	int	is_dead;
+
 	pthread_mutex_lock(&data->mutex_death);
-	if (data->is_dead == 1)
-	{
-		pthread_mutex_unlock(&data->mutex_death);
-		return (1);
-	}
+	is_dead = data->is_dead;
 	pthread_mutex_unlock(&data->mutex_death);
-	return (0);
+	return (is_dead);
 }

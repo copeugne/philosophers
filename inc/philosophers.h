@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/08/25 11:56:16 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/10/21 22:19:25 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@
 # define NORMAL	"\033[00m"
 # define NB		200
 
-typedef struct s_data t_data;
-typedef struct s_args t_args;
-typedef struct s_philo t_philo;
+typedef struct s_data	t_data;
+typedef struct s_args	t_args;
+typedef struct s_philo	t_philo;
+typedef struct s_copy	t_copy;
 
 struct s_args
 {
-	int nb_philo;
+	int	nb_philo;
 	int	ttdie;
 	int	tteat;
 	int	ttsleep;
@@ -44,17 +45,26 @@ struct s_args
 struct s_philo
 {
 	int			index;
+	long		last_meal;
 	long		start_time;
-	pthread_t	philo_thread;
-	t_args		args;
 	void		*data;
 	int			nb_meals;
+	int			r_fork;
+	int			l_fork;
+	t_args		args;
+	pthread_t	philo_thread;
+};
+
+struct s_copy
+{
+	int			index;
 	long		last_meal;
+	long		start_time;
 };
 
 struct s_data
 {
-	t_args 			args;
+	t_args			args;
 	t_philo			philo[NB];
 	pthread_mutex_t	mutex_fork[NB];
 	pthread_mutex_t	mutex_death;
@@ -67,8 +77,8 @@ struct s_data
 
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
-int		ft_usleep(int ttds);
-long	ft_time();
+int		ft_usleep(t_data *data, int ttds);
+long	ft_time(void);
 long	ft_now(long start_time);
 
 int		init_mutex(t_data *data);
@@ -77,13 +87,13 @@ int		fork_locker(t_data *data, t_philo *philo);
 int		fork_unlocker(t_data *data, t_philo *philo);
 
 void	init_datastruct(t_data *data);
-int		init_philo_index(t_data *data);
+int		init_philo_index(t_data *data, t_args *arg);
 int		init_philo_threads(t_data *data);
 int		thread_joiner(t_data *data);
 
 int		error(int return_value, char *msg);
 int		check_args(int argc, char **argv, t_data *data);
-int		load_args(int argc, char **argv, t_args *args);
+int		load_args(int argc, char **argv, t_data *data);
 
 void	*routine_philo(void *thread_arg);
 void	sub_sleep(t_data *data, t_philo *philo);
@@ -91,9 +101,8 @@ void	sub_eat(t_data *data, t_philo *philo);
 
 void	ft_display_message(t_data *data, int index, char *msg);
 
-
 int		check_nb_meals(t_data *data);
-int		pulse_check(t_data *data, t_philo *philo);
+int		pulse_check(t_data *data);
 int		check_death(t_data *data);
 int		is_end(t_data *data);
 

@@ -47,9 +47,9 @@ DEPS		 	= $(OBJECTS:.o=.d)
 #                                  FLAGS                                       #
 ################################################################################
 
-FSANITIZE		=	-g3 -fsanitize=thread
+# FSANITIZE		=	-g3 -fsanitize=thread
 #FLAGS			=	$(FSANITIZE)
-# FLAGS			=	-MMD -Wall -Wextra -Werror $(FSANITIZE)
+# FLAGS			=	-MMD -Wall -Wextra -Werror -pthread $(FSANITIZE)
 FLAGS			=	-Wall -Wextra -Werror -g -pthread
 CC				=	clang
 INCLUDES		=	-I$(INCLUDES_FOLDER)

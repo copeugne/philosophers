@@ -6,32 +6,46 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:06:57 by copeugne          #+#    #+#             */
-/*   Updated: 2022/08/25 12:02:58 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/10/21 22:28:52 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
+/**
+ * It's the routine a philosopher must follow
+ * 
+ * @param thread_arg the argument passed to the thread when it was created.
+ * 
+ * @return 0.
+ */
 void	*routine_philo(void *thread_arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	t_data	*data;
-	
+
 	philo = (t_philo *)thread_arg;
 	data = (t_data *)philo->data;
-
-	// printf(BLUE"data->philo[10].is_full : %d\n"NORMAL, data->philo[10].is_full);
-	while (is_end(data) == 0)
+	if (data->args.nb_philo == 1)
+	{
+		ft_display_message(data, philo->index, "has taken a fork");
+		ft_usleep(data, data->args.ttdie);
+		ft_display_message(data, philo->index, "died");
+		// pthread_mutex_lock(&data->mutex_death);
+		// data->is_dead = 1;
+		// pthread_mutex_unlock(&data->mutex_death);
+		return (0);
+	}
+	if (philo->index % 2 == 0)
+		usleep(1000);
+	while (!is_end(data))
 	{
 		sub_eat(data, philo);
 		pthread_mutex_lock(&data->mutex_write);
 		pthread_mutex_unlock(&data->mutex_write);
 		sub_sleep(data, philo);
-		printf(YELLOW"ft_time() - data->philo[philo->index].last_meal : %ld\n"NORMAL, ft_time() - data->philo[philo->index].last_meal);
 		ft_display_message(data, philo->index, "is thinking");
-		usleep(1000);
+		// usleep(1000);
 	}
-	// printf("EXIT THREAD %d\n", philo->index);
 	return (0);
 }
-
