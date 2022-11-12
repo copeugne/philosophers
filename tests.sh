@@ -23,10 +23,12 @@ concat=TEST_E
 # -no arguments- #
 TEST_E0=''
 TEST_E1='"" "" "" ""'
+
 # -wrong number of arguments- #
 TEST_E2='1'
 TEST_E3='1 2'
 TEST_E4='1 2 3'
+
 # -negative number- #
 TEST_E5='-1 1 1 1'
 TEST_E6='1 -1 1 1'
@@ -37,36 +39,44 @@ TEST_E10='1 -1 1 1 1'
 TEST_E11='1 1 -1 1 1'
 TEST_E12='1 1 1 -1 1'
 TEST_E13='1 1 1 1 -1'
+
 # -zero number- #
 TEST_E14='0 1 1 1'
 TEST_E15='1 0 1 1'
 TEST_E16='1 1 0 1'
 TEST_E17='1 1 1 0'
+
 TEST_E18='0 1 1 1 1'
 TEST_E19='1 0 1 1 1'
 TEST_E20='1 1 0 1 1'
 TEST_E21='1 1 1 0 1'
 TEST_E22='1 1 1 1 0'
-# -wrong type of argument- #
+
+# -wrong type of argument char- #
 TEST_E23='a 1 1 1'
 TEST_E24='1 a 1 1'
 TEST_E25='1 1 a 1'
 TEST_E26='1 1 1 a'
+
 TEST_E27='a 1 1 1 1'
 TEST_E28='1 a 1 1 1'
 TEST_E29='1 1 a 1 1'
 TEST_E30='1 1 1 a 1'
 TEST_E31='1 1 1 1 a'
+
+#-wrong type of argument Minus no space-
 TEST_E32='1- 1 1 1'
 TEST_E33='1 1- 1 1'
 TEST_E34='1 1 1- 1'
 TEST_E35='1 1 1 1-'
+
 TEST_E36='1- 1 1 1 1'
 TEST_E37='1 1- 1 1 1'
 TEST_E38='1 1 1- 1 1'
 TEST_E39='1 1 1 1- 1'
 TEST_E40='1 1 1 1 1-'
 
+#-wrong type of argument Minus space-
 TEST_E41='1 1 1 -'
 TEST_E42='1 1 1 1 -'
 TEST_E43='1- 1 1 1'

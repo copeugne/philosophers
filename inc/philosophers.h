@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/10/21 22:19:25 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/12 11:08:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ struct s_data
 	int				is_dead;
 	int				all_ate;
 };
+
+int		ft_strlen(const char *str);
 
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);

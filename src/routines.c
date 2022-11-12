@@ -26,7 +26,7 @@ void	*routine_philo(void *thread_arg)
 
 	philo = (t_philo *)thread_arg;
 	data = (t_data *)philo->data;
-	if (data->args.nb_philo == 1)
+	if (data->args.nb_philo == 1 || data->args.ttdie == 0)
 	{
 		ft_display_message(data, philo->index, "has taken a fork");
 		ft_usleep(data, data->args.ttdie);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_atoi.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:25:27 by copeugne          #+#    #+#             */
-/*   Updated: 2022/10/21 17:05:33 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/12 11:30:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@
 int	check(const char **str)
 {
 	int	sign;
+	int	len = 0;
 
 	sign = 0;
+	len = ft_strlen(*str);
+	if (len < 2 && (**str < '0' || **str > '9'))
+		error(33, "Error ft_atoi : Not a digit\n");
 	while (**str == '\n' || **str == '\v' || **str == '\t'
 		|| **str == ' ' || **str == '\f' || **str == '\r')
 		(*str)++;
@@ -69,6 +73,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nb = 0;
 	sign = check(&str);
+	if (sign != 1 && sign != 0)
+		error(31, "Error ft_atoi : Not an int\n");
 	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
 	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')

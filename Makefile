@@ -24,6 +24,7 @@ SOURCES :=	main.c			\
 			error.c			\
 			helpers_atoi.c	\
 			helpers_time.c	\
+			helpers_libft.c	\
 			parsing.c		\
 			init_threads.c	\
 			terminate.c		\
