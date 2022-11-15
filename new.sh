@@ -83,34 +83,133 @@ TEST_E47='1 1 - 1 1'
 TEST_E48='1 1 1 - 1'
 TEST_E49='1 1 1 1 -'
 
-
+TEST_E50="198 657 980 729"
+TEST_E51="119 1578 147 8"
+TEST_E52="105 786 725 745"
+TEST_E53="3 771 589 363"
+TEST_E54="9 1548 130 246"
+TEST_E55="38 1894 998 685"
+TEST_E56="74 101 963 341"
+TEST_E57="176 1096 853 611"
+TEST_E58="43 636 645 106"
+TEST_E59="49 629 994 320"
+TEST_E60="132 1361 648 394"
+TEST_E61="150 717 773 554"
+TEST_E62="94 1918 170 134"
+TEST_E63="133 1411 970 453"
+TEST_E64="174 1008 769 641"
+TEST_E65="116 1856 533 96"
+TEST_E66="19 1192 498 344"
+TEST_E67="107 531 755 119"
+TEST_E68="157 1483 543 681"
+TEST_E69="153 1931 13 66"
+TEST_E70="80 452 576 62"
+TEST_E71="146 1244 662 373"
+TEST_E72="63 845 692 178"
+TEST_E73="65 154 752 594"
+TEST_E74="180 922 652 140"
+TEST_E75="125 1809 974 344"
+TEST_E76="149 848 3 743"
+TEST_E77="122 1482 548 602"
+TEST_E78="29 1277 91 689"
+TEST_E79="121 1855 579 620"
+TEST_E80="150 1124 244 461"
+TEST_E81="103 867 205 170"
+TEST_E82="85 1795 764 310"
+TEST_E83="43 1271 824 168"
+TEST_E84="116 1317 510 209"
+TEST_E85="190 864 504 353"
+TEST_E86="45 1782 644 385"
+TEST_E87="55 1158 342 365"
+TEST_E88="173 1702 377 114"
+TEST_E89="194 881 741 20"
+TEST_E90="78 870 355 723"
+TEST_E91="19 1390 226 292"
+TEST_E92="103 1852 39 119"
+TEST_E93="126 1214 306 114"
+TEST_E94="83 1398 255 367"
+TEST_E95="197 1529 964 632"
+TEST_E96="16 1407 153 54"
+TEST_E97="99 196 754 303"
+TEST_E98="34 302 361 651"
+TEST_E99="71 427 739 230"
+TEST_E100="127 1966 179 149"
+TEST_E101="82 382 535 84"
+TEST_E102="87 309 339 225"
+TEST_E103="64 398 459 313"
+TEST_E104="130 1631 352 217"
+TEST_E105="124 591 401 65"
+TEST_E106="139 1136 437 138"
+TEST_E107="66 1118 678 222"
+TEST_E108="100 1354 642 214"
+TEST_E109="75 221 151 375"
+TEST_E110="188 552 618 583"
+TEST_E111="68 1023 961 509"
+TEST_E112="181 1696 927 249"
+TEST_E113="54 1881 820 197"
+TEST_E114="153 256 795 690"
+TEST_E115="183 1698 876 740"
+TEST_E116="198 1182 566 496"
+TEST_E117="175 243 327 576"
+TEST_E118="25 1965 478 674"
+TEST_E119="58 1871 551 27"
+TEST_E120="7 374 740 393"
+TEST_E121="123 1292 358 697"
+TEST_E122="129 1141 115 734"
+TEST_E123="111 740 938 270"
+TEST_E124="41 553 227 450"
+TEST_E125="150 1806 579 472"
+TEST_E126="123 1863 686 527"
+TEST_E127="56 1241 138 293"
+TEST_E128="195 228 20 566"
+TEST_E129="16 1928 463 516"
+TEST_E130="125 564 750 563"
+TEST_E131="60 829 209 420"
+TEST_E132="199 540 152 56"
+TEST_E133="190 1260 612 737"
+TEST_E134="46 1937 251 4"
+TEST_E135="182 629 45 459"
+TEST_E136="65 1707 666 194"
+TEST_E137="129 879 931 518"
+TEST_E138="97 2 80 172"
+TEST_E139="155 32 173 418"
+TEST_E140="49 189 904 587"
+TEST_E141="23 888 334 706"
+TEST_E142="58 259 618 217"
+TEST_E143="57 420 399 611"
+TEST_E144="170 26 706 201"
+TEST_E145="17 526 647 340"
+TEST_E146="140 1140 516 674"
+TEST_E147="173 264 409 682"
+TEST_E148="162 1125 204 643"
+TEST_E149="183 1831 181 459"
 echo "    ${GREEN_B}----START----${NC}"
 make
 concat=TEST_E
 tmp=$concat
-i=0
+i=49
 echo "    ${GREEN_B}----No Arguments----${NC}"
-while [ $i -le 49 ]
+while [ $i -le 149 ]
 do
-	if [[ ( $i = 2 ) ]]; then
-		echo "    ${GREEN_B}----Wrong Number of Arguments----${NC}"
-	elif [[ ( $i = 5 ) ]]; then
-		echo "    ${GREEN_B}----Negative Number----${NC}"
-	elif [[ ( $i = 14 ) ]]; then
-		echo "    ${GREEN_B}----Zero Number Argument----${NC}"
-	elif [[ ( $i = 23 ) ]]; then
-		echo "    ${GREEN_B}----Wrong Type of Argument char----${NC}"
-	elif [[ ( $i = 32 ) ]]; then
-		echo "    ${GREEN_B}----Wrong Type of Argument minus no space----${NC}"
-	elif [[ ( $i = 41 ) ]]; then
-		echo "    ${GREEN_B}----Wrong Type of Argument minus with space----${NC}"
-	fi
+	# if [[ ( $i = 2 ) ]]; then
+	# 	echo "    ${GREEN_B}----Wrong Number of Arguments----${NC}"
+	# elif [[ ( $i = 5 ) ]]; then
+	# 	echo "    ${GREEN_B}----Negative Number----${NC}"
+	# elif [[ ( $i = 14 ) ]]; then
+	# 	echo "    ${GREEN_B}----Zero Number Argument----${NC}"
+	# elif [[ ( $i = 23 ) ]]; then
+	# 	echo "    ${GREEN_B}----Wrong Type of Argument char----${NC}"
+	# elif [[ ( $i = 32 ) ]]; then
+	# 	echo "    ${GREEN_B}----Wrong Type of Argument minus no space----${NC}"
+	# elif [[ ( $i = 41 ) ]]; then
+	# 	echo "    ${GREEN_B}----Wrong Type of Argument minus with space----${NC}"
+	# fi
 	concat="$tmp$i"
 	echo $concat "🠚" "${(P)concat}"
 	final="${(P)concat}"
 	parts=("${(@s[ ])final}")
 	# for j ("$parts[@]") print -r -- $j
-	timeout 10s ./philo $parts[1] $parts[2] $parts[3] $parts[4] $parts[5]
+	timeout 5s ./philo $parts[1] $parts[2] $parts[3] $parts[4] $parts[5]
 	i=$(( $i + 1 ))
 	# echo $i
 done
