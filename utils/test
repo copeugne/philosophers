@@ -1,0 +1,5 @@
+./philo 3 310 100 80 // Seems to be working
+./philo 2 10 10 10 5
+./philo 132 1433 970 453
+./philo 133 1433 970 453
+./philo 132 3750 970 455

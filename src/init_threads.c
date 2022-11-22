@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 10:18:23 by copeugne          #+#    #+#             */
-/*   Updated: 2022/10/21 22:35:33 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:35:41 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	init_philo_index(t_data *data, t_args *arg)
  * It initializes the threads of the philosophers
  * 
  * @param data the structure containing all the data
+	// TODO: Prevent memory leaks, patch/fix them
  * 
  * @return 0.
  */
@@ -67,7 +68,6 @@ int	init_philo_threads(t_data *data)
 	init_philo_index(data, &data->args);
 	while (i < data->args.nb_philo)
 	{
-		// TODO: Prevent memory leaks, patch/fix them
 		if (pthread_create(&data->philo[i].philo_thread, NULL, &routine_philo,
 				&data->philo[i]) != 0)
 			error(41, "Error init_philo_threads : Issue in pthread creation");

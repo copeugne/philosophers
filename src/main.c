@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 10:06:20 by copeugne          #+#    #+#             */
-/*   Updated: 2022/11/12 11:19:50 by codespace        ###   ########.fr       */
+/*   Updated: 2022/11/22 19:23:23 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	check_args(argc, argv, &data);
 	init_mutex(&data);
 	init_philo_threads(&data);
-	pulse_check(&data);
+	pulse_check(&data, 0, 0);
 	thread_joiner(&data);
 	mutex_destroyer(&data);
 	return (0);

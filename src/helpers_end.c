@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/11/08 17:40:31 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:22:27 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_nbmeals_philo(t_data *data)
 		i++;
 	}
 	if (c == data->args.nb_philo - 1 && data->args.nb_tteat > 0)
-		data->all_ate = 1;	
+		data->all_ate = 1;
 }
 
 /**
@@ -43,14 +43,13 @@ void	check_nbmeals_philo(t_data *data)
  * 
  * @param data the structure containing all the data
  */
-int		check_nb_meals(t_data *data)
+int	check_nb_meals(t_data *data)
 {
 	pthread_mutex_lock(&data->mutex_nbtte);
 	check_nbmeals_philo(data);
 	if (data->all_ate == 1)
 	{
 		pthread_mutex_unlock(&data->mutex_nbtte);
-		// TODO : Function to end the execution correctly.
 		pthread_mutex_lock(&data->mutex_death);
 		data->is_dead = 1;
 		pthread_mutex_unlock(&data->mutex_death);
@@ -67,20 +66,23 @@ int		check_nb_meals(t_data *data)
 	return (0);
 }
 
+void	grim_reaper(t_data *data)
+{
+	pthread_mutex_lock(&data->mutex_death);
+	data->is_dead = 1;
+	pthread_mutex_unlock(&data->mutex_death);
+}
+
 /**
  * It checks if a philosopher is still alive
  * or if he died of starvation
  * 
  * @param data the structure containing all the data
  */
-int	pulse_check(t_data *data)
+int	pulse_check(t_data *data, int i, long int t)
 {
-	int	i;
-	int const time2die = data->args.ttdie;
-	t_copy copy;
-	long int t;
-	
-	i = 0;
+	t_copy		copy;
+
 	if (data->args.nb_philo == 1)
 		return (0);
 	while (!check_death(data))
@@ -88,13 +90,11 @@ int	pulse_check(t_data *data)
 		pthread_mutex_lock(&data->mutex_last_meal);
 		copy = *((t_copy *)(data->philo + i));
 		pthread_mutex_unlock(&data->mutex_last_meal);
-		if (ft_time() - copy.last_meal >= time2die && copy.last_meal != -1)
+		if (ft_time() - copy.last_meal >= data->args.ttdie
+			&& copy.last_meal != -1)
 		{
 			t = ft_now(copy.start_time);
-			// ft_usleep(data->args.ttdie);
-			pthread_mutex_lock(&data->mutex_death);
-			data->is_dead = 1;
-			pthread_mutex_unlock(&data->mutex_death);
+			grim_reaper(data);
 			pthread_mutex_lock(&data->mutex_write);
 			printf("%lu %d %s\n", t, copy.index, "died");
 			pthread_mutex_unlock(&data->mutex_write);

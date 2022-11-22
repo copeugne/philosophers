@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 13:06:57 by copeugne          #+#    #+#             */
-/*   Updated: 2022/10/21 22:28:52 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:06:40 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	*routine_philo(void *thread_arg)
 		ft_display_message(data, philo->index, "has taken a fork");
 		ft_usleep(data, data->args.ttdie);
 		ft_display_message(data, philo->index, "died");
-		// pthread_mutex_lock(&data->mutex_death);
-		// data->is_dead = 1;
-		// pthread_mutex_unlock(&data->mutex_death);
 		return (0);
 	}
 	if (philo->index % 2 == 0)
@@ -45,7 +42,6 @@ void	*routine_philo(void *thread_arg)
 		pthread_mutex_unlock(&data->mutex_write);
 		sub_sleep(data, philo);
 		ft_display_message(data, philo->index, "is thinking");
-		// usleep(1000);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:26:08 by copeugne          #+#    #+#             */
-/*   Updated: 2022/11/12 11:08:26 by codespace        ###   ########.fr       */
+/*   Updated: 2022/11/22 19:23:01 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	sub_eat(t_data *data, t_philo *philo);
 void	ft_display_message(t_data *data, int index, char *msg);
 
 int		check_nb_meals(t_data *data);
-int		pulse_check(t_data *data);
+int		pulse_check(t_data *data, int i, long int t);
 int		check_death(t_data *data);
 int		is_end(t_data *data);
 

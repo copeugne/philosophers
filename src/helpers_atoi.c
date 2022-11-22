@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers_atoi.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 09:25:27 by copeugne          #+#    #+#             */
-/*   Updated: 2022/11/12 11:30:26 by codespace        ###   ########.fr       */
+/*   Updated: 2022/11/22 17:32:40 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int	check(const char **str)
 {
 	int	sign;
-	int	len = 0;
+	int	len;
 
 	sign = 0;
 	len = ft_strlen(*str);
@@ -83,8 +83,7 @@ int	ft_atoi(const char *str)
 			return (-1);
 		else if (nb > (unsigned int)MINI)
 			return (0);
-		nb *= 10;
-		nb += str[i] - '0';
+		nb = nb * 10 + str[i] - '0';
 		i++;
 	}
 	if (str[i] && str[i] != 32 && !ft_isdigit(str[i]))
@@ -103,13 +102,11 @@ int	ft_atoi(const char *str)
  */
 void	ft_display_message(t_data *data, int index, char *msg)
 {
-	long int t;
+	long int	t;
 
 	t = ft_now(data->philo[index].start_time);
-	// pthread_mutex_lock(&data->mutex_death);
 	if (!is_end(data))
 	{
-		// pthread_mutex_unlock(&data->mutex_death);
 		pthread_mutex_lock(&data->mutex_write);
 		printf("%lu %d %s\n", t, index, msg);
 		pthread_mutex_unlock(&data->mutex_write);

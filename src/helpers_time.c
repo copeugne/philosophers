@@ -6,7 +6,7 @@
 /*   By: copeugne <copeugne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 11:38:06 by copeugne          #+#    #+#             */
-/*   Updated: 2022/10/21 21:49:17 by copeugne         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:19:56 by copeugne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_usleep(t_data *data, int ttds)
 	while (ft_time() - now < ttds)
 	{
 		if (check_death(data))
-			break;
+			break ;
 		usleep(1000);
 	}
 	return (0);
